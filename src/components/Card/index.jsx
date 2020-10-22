@@ -27,8 +27,8 @@ const Card = ({ title }) => {
     return (
         <CustomCard className="card">
             <CustomDiv className="card-content">
-                <div className="title" style={{ margin: 0 }}>{ title }</div>
-                <div><Icon className="mdi-arrow-right" style={{ fontSize: '24px' }} /></div>
+                <div className="title" style={{ margin: 0, fontSize: '24px' }}>{ title }</div>
+                <div><Icon className="mdi-arrow-right" style={{ fontSize: '20px' }} /></div>
             </CustomDiv>
         </CustomCard>
     )

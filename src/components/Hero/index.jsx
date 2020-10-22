@@ -23,7 +23,7 @@ const Hero = ({ user, title, hasUploadButton }) => {
             <div className="hero-body">
                 <div className="container">
                     <Div>
-                        <h1 className="title" style={{ margin: 0, textTransform: 'capitalize' }}>
+                        <h1 className={`title ${title === 'tle' || title === 'mapeh' ? 'is-uppercase':'is-capitalized'}`} style={{ margin: 0 }}>
                             {title}
                         </h1>
                         {user && hasUploadButton ? (

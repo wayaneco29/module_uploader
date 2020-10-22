@@ -2,11 +2,13 @@ import React from 'react';
 import { DateTime as DT } from 'luxon';
 import firebase, { store, storage } from '../../../../firebase';
 import Icon from '../../../Icon'
+import Input from '../../../Input'
 import Button from '../../../Button'
 import Modal, { Content, Action } from '../../../Modal';
 import * as bulmaToast from 'bulma-toast';
 
 const UploadModal = ({ isOpen, closeModal, user }) => {
+    const [moduleName, setModuleName] = React.useState('');
     const [selectedFile, setSelectedFile] = React.useState(null);
     const [subject, setSubject] = React.useState('');
     const [loading, setLoading] = React.useState(false);
@@ -21,25 +23,38 @@ const UploadModal = ({ isOpen, closeModal, user }) => {
     React.useEffect(() => {
         return () => {
             setSubject('');
+            setModuleName('');
             setSelectedFile(null);
         }
     }, [isOpen])
 
+    const handleModuleChange = (event) => {
+        event.persist();
+        const { value } = event.target;
+        setModuleName(value)
+    }
 
-    const handleSave = async () => {
-        setLoading(true);
-        const fileName = DT.local().toMillis();
-        const collectionRef = store.collection(`modules/PP28US4d6VvdP16dpx7L/${subject}`).doc();
-        const storageRef = storage.ref(`/modules/${fileName}`);
-        const uploadTaker = storageRef.put(selectedFile);
+    const handleSave = () => {
+        if (!moduleName || !moduleName.length) {
+            let message = `<span class="icon mdi mdi-alert-circle"></span> Please enter the file name.`;
+            bulmaToast.toast({
+                message,
+                type: 'is-grey',
+                duration: 2000,
+                position: 'top-center',
+            });
+            return;
+        }
         
         if (!subject || !selectedFile) {
             let message = '';
+
             if (!subject) {
                 message = `<span class="icon mdi mdi-alert-circle"></span> Please select a subject.`;
             } else {
                 message = `<span class="icon mdi mdi-alert-circle"></span> Please select a file to be uploaded.`;
             }
+            
             bulmaToast.toast({
                 message,
                 type: 'is-grey',
@@ -49,51 +64,69 @@ const UploadModal = ({ isOpen, closeModal, user }) => {
 
             return;
         }
-        try {
-            uploadTaker.on('state_changed', (snapshot) => { 
-                const { bytesTransferred, totalBytes} = snapshot;
-                const totalPercentage = (bytesTransferred/totalBytes) * 100;
-                setPercentage(totalPercentage);
-            }, () => {},
-            async () => {
-                const fileUrl = await uploadTaker.snapshot.ref.getDownloadURL().then(url => url);
-                await collectionRef.set({
-                    url: fileUrl,
-                    author: user.displayName || '',
-                    date_uploaded: DT.local().toUTC().toISO(),
-                }, { merge: true });
 
-                const message = `<span class="icon mdi mdi-check"></span> Successfuly uploaded file.`
-                bulmaToast.toast({
-                    message,
-                    type: 'is-success',
-                    duration: 2000,
-                    position: 'top-center',
-                });
-                setLoading(false)
-                closeModal();
-            })
-        } catch (error) {
-                collectionRef.delete();
-                storageRef.delete();
-                const message = `<span class="icon mdi mdi-alert-circle"></span> ${error.message}`;
-                bulmaToast.toast({
+        setLoading(true);
+
+        const splitName = selectedFile.name.split('.');
+        const getTheLength = splitName.length;
+
+        const fileName = DT.local().toMillis();
+        const collectionRef = store.collection(`modules/PP28US4d6VvdP16dpx7L/${subject}`).doc();
+        const storageRef = storage.ref(`/modules/${fileName}.${splitName[getTheLength - 1]}`);
+        const uploadTaker = storageRef.put(selectedFile);
+
+        uploadTaker.on(
+        'state_changed',
+        (snapshot) => { 
+            const { bytesTransferred, totalBytes} = snapshot;
+            const totalPercentage = (bytesTransferred/totalBytes) * 100;
+            setPercentage(totalPercentage);
+        },
+        (error) => {
+            const message = `<span class="icon mdi mdi-alert-circle"></span> ${error.message}`;
+
+            collectionRef.delete();
+            storageRef.delete();
+
+            bulmaToast.toast({
                 message,
                 type: 'is-grey',
                 duration: 2000,
                 position: 'top-center',
             });
+
             setLoading(false);
-        }
+        },
+        async () => {
+            const fileUrl = await uploadTaker.snapshot.ref.getDownloadURL().then(url => url);
+            await collectionRef.set({
+                url: fileUrl,
+                author: user.displayName || '',
+                name: moduleName,
+                type: splitName[getTheLength - 1],
+                date_uploaded: DT.local().toUTC().toISO(),
+            }, { merge: true });
+
+            const message = `<span class="icon mdi mdi-check"></span> Successfuly uploaded file.`
+            bulmaToast.toast({
+                message,
+                type: 'is-success',
+                duration: 2000,
+                position: 'top-center',
+            });
+            setLoading(false)
+            closeModal();
+        })
     }
 
     return (
         <Modal isOpen={isOpen} closeModal={closeModal} title="Upload a file">
             <Content>
                 <div>
+                    <Input placeholder="File Name" value={moduleName} onChange={handleModuleChange} />
                     <div className="field">
                         <div className="control">
-                            <div className="select is-primary" style={{ width: '100%' }}>
+                            <div className="select" style={{ width: '100%' }}>
                                 <select style={{ width: '100%' }} onChange={handleChangeSubject} value={subject}>
                                     <option>Select Subject</option>
                                     <option value="english">English</option>
@@ -113,7 +146,6 @@ const UploadModal = ({ isOpen, closeModal, user }) => {
                             <input className="file-input" type="file" name="resume" 
                             onChange={(event) => {
                                 event.persist();
-                                console.log(event)
                                 const { files } = event.target;
                                 setSelectedFile(files[0]);
                             }} />

@@ -7,7 +7,7 @@ import Subjects from '../../containers/Subjects';
 const Dashboard = ({ user }) => {
     return (
        <div>
-            <Navbar user={user} url="/" />
+            <Navbar user={user} url={user ? '/dashboard' : '/'} />
             <Hero user={user} title="Subjects" hasUploadButton={true} />
             <Subjects/>
        </div>

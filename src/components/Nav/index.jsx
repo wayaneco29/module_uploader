@@ -32,15 +32,15 @@ const Navbar = ({ user, url }) => {
     }
 
     return (
-        <nav className="navbar is-success" role="navigation" aria-label="main navigation" style={{ background: '#771125'}}>
+        <nav className="navbar" style={{ background: '#771125'}}>
             <DivStyle>
                 <div className="navbar-brand" style={{ width: 'fit-content'}}>
-                    <LinkStyle className="navbar-item" to={url}><Icon className="mdi-arrow-left" style={{ marginRight: '0px' }} />MACI</LinkStyle>
+                    <LinkStyle className="navbar-item" to={url} style={{ color: '#eee'}}><Icon className="mdi-arrow-left" style={{ marginRight: '0px' }} />MACI</LinkStyle>
                 </div>
                 {user && (
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <img src={user.photoURL}  style={{ width: '40px', height: '40px', borderRadius: '50%', border: '1px solid #ffdd57' }} />
-                        <div style={{ padding: '0.5rem 0.75rem', cursor: 'pointer' }} onClick={handleSignOut}>SIGN OUT</div>
+                        <div style={{ padding: '0.5rem 0.75rem', cursor: 'pointer', color: '#eee' }} onClick={handleSignOut}>SIGN OUT</div>
                     </div>
                 )}
             </DivStyle>
