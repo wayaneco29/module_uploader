@@ -5,7 +5,7 @@ import Input from '../Input';
 import styled from 'styled-components';
 
 const ModalCardStyle = styled.div`
-    width: 430px;
+    width: 400px;
 
     @media (max-width: 481px) {
         width: 300px !important;
