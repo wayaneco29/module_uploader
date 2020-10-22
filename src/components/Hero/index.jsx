@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 import UploadModal from './components/UploadModal';
 
+
 const Div = styled.div`
     display: flex;
     justify-content: space-between;
@@ -23,7 +24,7 @@ const Hero = ({ user, title, hasUploadButton }) => {
             <div className="hero-body">
                 <div className="container">
                     <Div>
-                        <h1 className={`title ${title === 'tle' || title === 'mapeh' ? 'is-uppercase':'is-capitalized'}`} style={{ margin: 0 }}>
+                        <h1 className={`title ${title === 'tle' || title === 'mapeh' || title === 'epp' ? 'is-uppercase':'is-capitalized'}`} style={{ margin: 0 }}>
                             {title}
                         </h1>
                         {user && hasUploadButton ? (

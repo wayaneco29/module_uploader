@@ -1,11 +1,23 @@
 import React from 'react';
 import { DateTime as DT } from 'luxon';
-import firebase, { store, storage } from '../../../../firebase';
+import { store, storage } from '../../../../firebase';
 import Icon from '../../../Icon'
 import Input from '../../../Input'
 import Button from '../../../Button'
 import Modal, { Content, Action } from '../../../Modal';
 import * as bulmaToast from 'bulma-toast';
+import styled from 'styled-components';
+
+const ButtonContainer = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+    & > .button {
+        width: 48%;
+    }
+`;
 
 const UploadModal = ({ isOpen, closeModal, user }) => {
     const [moduleName, setModuleName] = React.useState('');
@@ -151,7 +163,7 @@ const UploadModal = ({ isOpen, closeModal, user }) => {
                             }} />
                             <span className="file-cta">
                                 <Icon className="mdi-upload" />
-                                UPLOAD
+                                {window.innerWidth < 481 ? '' : 'UPLOAD'}
                             </span>
                             <span className="file-name" style={{ width: '100%' }}>
                                 {!selectedFile ? 'Choose a file…' : selectedFile.name }
@@ -162,8 +174,10 @@ const UploadModal = ({ isOpen, closeModal, user }) => {
                 </div>
             </Content>
             <Action>
-                <Button className="is-warning" onClick={handleSave} disabled={loading}>{loading ? 'UPLOADING...' : 'UPLOAD'}</Button>
-                <Button onClick={closeModal} disabled={loading}>CANCEL</Button>
+                <ButtonContainer>
+                    <Button className="is-warning" onClick={handleSave} disabled={loading}>{loading ? 'UPLOADING...' : 'UPLOAD'}</Button>
+                    <Button onClick={closeModal} disabled={loading}>CANCEL</Button>
+                </ButtonContainer>
             </Action>
         </Modal>
     )

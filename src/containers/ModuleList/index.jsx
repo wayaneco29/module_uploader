@@ -5,6 +5,7 @@ import Icon from '../../components/Icon';
 import Navbar from '../../components/Nav';
 import Loader from '../../components/Loader';
 
+import { DateTime as DT } from 'luxon';
 import { store } from '../../firebase';
 
 const ModuleList = ({ user }) => {
@@ -24,7 +25,7 @@ const ModuleList = ({ user }) => {
     React.useEffect(() => {
         try {
             setLoading(true)
-            const collectionRef = store.collection(`modules/PP28US4d6VvdP16dpx7L/${subject}`);
+            const collectionRef = store.collection(`modules/PP28US4d6VvdP16dpx7L/${subject}`).orderBy('date_uploaded');
 
             collectionRef.get().then(async (data) => {
                 const modulesData = [];
@@ -49,10 +50,10 @@ const ModuleList = ({ user }) => {
             <Navbar user={user} url="/dashboard" />
             <Hero user={user} title={title} hasUploadButton={false} />
             <div className="hero-body" style={{ paddingTop: '0px', paddingBottom: '0px'}}>
-                <div className="container">
+                <div className="container" style={{ overflowX: 'auto' }}>
                     {loading ? <Loader /> : (
                         modules && modules.length ? (
-                            <div className="table-container">
+                            <div className="table-container" style={{ minWidth: '590px' }}>
                                 <table className="table is-striped is-hoverable is-fullwidth">
                                     <thead>
                                         <tr>
@@ -67,7 +68,7 @@ const ModuleList = ({ user }) => {
                                         <tr key={xModule.id}>
                                             <td style={{ verticalAlign: 'middle' }}>{xModule.author}</td>
                                             <td style={{ verticalAlign: 'middle' }}>{xModule.name}</td>
-                                            <td style={{ verticalAlign: 'middle' }}>{xModule.date_uploaded}</td>
+                                            <td style={{ verticalAlign: 'middle' }}>{DT.fromISO(xModule.date_uploaded).toFormat('DDD @ t')}</td>
                                             <td style={{ width: '10px' }}>
                                                 <a href={xModule.url} target="_blank" download>
                                                     <Icon className="mdi-download" style={{ cursor: 'pointer', fontSize: '20px' }} />

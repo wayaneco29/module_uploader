@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Input = ({ handleChange, className, hasIcon, ...props}) => {
+    // eslint-disable-next-line
     const classes = ['input', className]. join(' ');
 
     return (

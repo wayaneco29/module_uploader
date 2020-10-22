@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Link, useRouteMatch } from 'react-router-dom';
 
-import { store } from '../../firebase';
-
 import Card from '../../components/Card';
 
 import styled from 'styled-components';
@@ -12,6 +10,14 @@ const GridDiv = styled.div`
     display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(24%, 1fr));
     grid-gap: 15px;
+
+    @media (max-width: 650px) {
+        grid-template-columns: repeat(auto-fill, minmax(45%, 1fr)) !important;
+    }
+
+    @media (max-width: 481px) {
+        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)) !important;
+    }
 `;
 
 const datas = [
@@ -44,7 +50,6 @@ const datas = [
 
 const Subjects = () => {
     const match = useRouteMatch();
-    const [modules, setModules] = React.useState([]);
 
     return (
         <div className="hero-body" style={{ paddingTop: '0px', paddingBottom: '0px'}}>

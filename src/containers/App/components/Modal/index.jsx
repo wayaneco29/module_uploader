@@ -6,6 +6,18 @@ import { auth } from '../../../../firebase';
 import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
 import Modal, { Action, Content } from '../../../../components/Modal';
+import styled from 'styled-components';
+
+const ButtonContainer = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+    & > .button {
+        width: 48%;
+    }
+`;
 
 const LoginModal = ({ isOpen, closeModal, ...props }) => {
     const history = useHistory();
@@ -52,8 +64,10 @@ const LoginModal = ({ isOpen, closeModal, ...props }) => {
                     <Input hasIcon="mdi-lock" placeholder="Password" type="password" handleChange={handleOnChange} name="password" />
                 </Content>
                 <Action>
-                    <Button onClick={handleLogin} className="is-warning" disabled={loading}>{loading ? 'SIGNING IN...' : 'SIGN IN'}</Button>
-                    <Button onClick={closeModal} disabled={loading}>CLOSE</Button>
+                    <ButtonContainer>
+                        <Button onClick={handleLogin} className="is-warning" disabled={loading}>{loading ? 'SIGNING IN...' : 'SIGN IN'}</Button>
+                        <Button onClick={closeModal} disabled={loading}>CLOSE</Button>
+                    </ButtonContainer>
                 </Action>
             </Modal>
         </React.Fragment>
