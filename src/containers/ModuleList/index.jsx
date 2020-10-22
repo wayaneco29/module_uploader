@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import Hero from '../../components/Hero';
 import Icon from '../../components/Icon';
 import Footer from '../../components/Footer';
@@ -9,11 +9,31 @@ import Loader from '../../components/Loader';
 import { DateTime as DT } from 'luxon';
 import { store } from '../../firebase';
 
+const requiredSubjects = [
+    'english',
+    'filipino',
+    'mathematics',
+    'science',
+    'araling_panlipunan',
+    'epp',
+    'tle',
+    'mapeh',
+];
+
 const ModuleList = ({ user }) => {
+    const history = useHistory();
     const { subject } = useParams();
     const [title, setTitle] = React.useState('');
     const [modules, setModules] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
+
+    React.useEffect(() => {
+        const isValid = requiredSubjects.includes(subject);
+        
+        if (!isValid) {
+            history.push('/NotFound');
+        }
+    })
 
     React.useEffect(() => {
         if (subject === 'araling_panlipunan') {

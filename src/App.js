@@ -11,7 +11,7 @@ import './App.css';
 import Banner from './containers/App';
 import Dashboard from './containers/Dashboard';
 import ModuleList from './containers/ModuleList';
-
+import NotFound from './components/NotFound';
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -37,7 +37,8 @@ function App() {
       <Switch>
         <Route path="/" exact={true}><Banner /></Route>
         <Route path="/dashboard" exact><Dashboard user={user} /></Route>
-        <Route path="/dashboard/:subject"><ModuleList user={user} /></Route>
+        <Route path="/dashboard/:subject" exact><ModuleList user={user} /></Route>
+        <Route path="*" exact><NotFound /></Route>
       </Switch>
     </Router>
   );
