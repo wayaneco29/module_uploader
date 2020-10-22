@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Hero from '../../components/Hero';
 import Icon from '../../components/Icon';
+import Footer from '../../components/Footer';
 import Navbar from '../../components/Nav';
 import Loader from '../../components/Loader';
 
@@ -49,40 +50,45 @@ const ModuleList = ({ user }) => {
         <div>
             <Navbar user={user} url="/dashboard" />
             <Hero user={user} title={title} hasUploadButton={false} />
-            <div className="hero-body" style={{ paddingTop: '0px', paddingBottom: '0px'}}>
-                <div className="container" style={{ overflowX: 'auto' }}>
-                    {loading ? <Loader /> : (
-                        modules && modules.length ? (
-                            <div className="table-container" style={{ minWidth: '590px' }}>
-                                <table className="table is-striped is-hoverable is-fullwidth">
-                                    <thead>
-                                        <tr>
-                                            <th>Uploaded by</th>
-                                            <th>Name</th>
-                                            <th>Uploaded on</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {modules.map(xModule => (
-                                        <tr key={xModule.id}>
-                                            <td style={{ verticalAlign: 'middle' }}>{xModule.author}</td>
-                                            <td style={{ verticalAlign: 'middle' }}>{xModule.name}</td>
-                                            <td style={{ verticalAlign: 'middle' }}>{DT.fromISO(xModule.date_uploaded).toFormat('DDD @ t')}</td>
-                                            <td style={{ width: '10px' }}>
-                                                <a href={xModule.url} target="_blank" download>
-                                                    <Icon className="mdi-download" style={{ cursor: 'pointer', fontSize: '20px' }} />
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        ) : <div style={{ fontSize: '1.3rem', textAlign: 'center', fontWeight: 'bold' }}>You have no modules available.</div>
-                        
-                    )}
-                </div>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height:'calc(100vh - 184px)' }}>
+                <React.Fragment>
+                    <div className="hero-body" style={{ paddingTop: '0px', paddingBottom: '30px'}}>
+                        <div className="container" style={{ overflowX: 'auto' }}>
+                            {loading ? <Loader /> : (
+                                modules && modules.length ? (
+                                    <div className="table-container" style={{ minWidth: '590px' }}>
+                                        <table className="table is-striped is-hoverable is-fullwidth">
+                                            <thead>
+                                                <tr>
+                                                    <th>Uploaded by</th>
+                                                    <th>Name</th>
+                                                    <th>Uploaded on</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {modules.map(xModule => (
+                                                <tr key={xModule.id}>
+                                                    <td style={{ verticalAlign: 'middle' }}>{xModule.author}</td>
+                                                    <td style={{ verticalAlign: 'middle' }}>{xModule.name}</td>
+                                                    <td style={{ verticalAlign: 'middle' }}>{DT.fromISO(xModule.date_uploaded).toFormat('DDD @ t')}</td>
+                                                    <td style={{ width: '10px' }}>
+                                                        <a href={xModule.url} target="_blank" download>
+                                                            <Icon className="mdi-download" style={{ cursor: 'pointer', fontSize: '20px' }} />
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                ) : <div style={{ fontSize: '1.3rem', textAlign: 'center', fontWeight: 'bold' }}>You have no modules available.</div>
+                                
+                            )}
+                        </div>
+                    </div>
+                </React.Fragment>
+                <Footer />
             </div>
         </div>
     )

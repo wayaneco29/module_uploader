@@ -52,7 +52,7 @@ const Subjects = () => {
     const match = useRouteMatch();
 
     return (
-        <div className="hero-body" style={{ paddingTop: '0px', paddingBottom: '0px'}}>
+        <div className="hero-body" style={{ paddingTop: '0px', paddingBottom: '30px'}}>
             <div className="container">
                 <GridDiv>
                     {datas.map(({ name, link }) => (
