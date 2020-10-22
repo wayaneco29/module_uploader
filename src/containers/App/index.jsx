@@ -32,7 +32,7 @@ const Banner = () => {
             <header className="App-header">
                 <img src={img} />
                 <Divider />
-                <h1>MACROHON INSTITUTE INC. MODULE SYSTEM</h1>
+                <h1 style={{ margin: '0px 14px' }}>MACROHON INSTITUTE INC. MODULE SYSTEM</h1>
                 <Divider />
                 <Div>
                     <button className="button is-warning" onClick={handleToggleModal}>

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Icon from '../Icon';
+
 import styled from 'styled-components';
 
 const Div = styled.div`
@@ -14,7 +16,7 @@ const Footer = () => {
 
     return (
         <Div>
-            Made by: <a href="https://www.facebook.com/Wayandanyael" target="_blank" style={{ color: '#ffdd57'}}>Wayan Danyael Eco</a> &copy; 2020.
+            Made with <Icon className="mdi-heart" /> by: <a href="https://www.facebook.com/Wayandanyael" target="_blank" style={{ color: '#ffdd57'}}>Wayan Danyael Eco</a> &copy; 2020.
         </Div>
     )
 }
