@@ -38,7 +38,10 @@ const Navbar = ({ user, url }) => {
                     <LinkStyle className="navbar-item" to={url}><Icon className="mdi-arrow-left" style={{ marginRight: '0px' }} />MACI</LinkStyle>
                 </div>
                 {user && (
-                    <div style={{ padding: '0.5rem 0.75rem', cursor: 'pointer' }} onClick={handleSignOut}>SIGN OUT</div>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <img src={user.photoURL}  style={{ width: '40px', height: '40px', borderRadius: '50%', border: '1px solid #ffdd57' }} />
+                        <div style={{ padding: '0.5rem 0.75rem', cursor: 'pointer' }} onClick={handleSignOut}>SIGN OUT</div>
+                    </div>
                 )}
             </DivStyle>
         </nav>

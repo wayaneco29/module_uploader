@@ -32,10 +32,10 @@ const LoginModal = ({ isOpen, closeModal, ...props }) => {
             history.push('/dashboard');
             setLoading(false);
         } catch (error) {
-            const message = `<span class="icon mdi mdi-close"></span> ${error.message}`
+            const message = `<span class="icon mdi mdi-alert-circle"></span> ${error.message}`
             bulmaToast.toast({
                 message,
-                type: 'is-danger',
+                type: 'is-grey',
                 duration: 2000,
                 dismissible: true,
                 position: 'top-center',

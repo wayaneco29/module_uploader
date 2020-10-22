@@ -32,7 +32,7 @@ const Hero = ({ user, title, hasUploadButton }) => {
                     </Div>
                 </div>
             </div>
-            <UploadModal isOpen={openModal} closeModal={handleToggleModal} />
+            <UploadModal isOpen={openModal} closeModal={handleToggleModal} user={user} />
         </section>
     )
 }

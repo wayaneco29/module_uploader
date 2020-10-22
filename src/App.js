@@ -17,10 +17,20 @@ function App() {
   const [user, setUser] = React.useState(null);
 
   React.useEffect(() => {
-    auth.onAuthStateChanged(xUser => {
-      setUser(xUser);
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            const { email, displayName, photoURL } = user;
+            setUser({
+                email,
+                displayName,
+                photoURL,
+            })
+        } else {
+            setUser(null);
+        }
+        
     })
-  }, []);
+}, []);
 
   return (
     <Router>
