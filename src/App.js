@@ -1,25 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
+import styled from 'styled-components';
+
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { auth } from './firebase';
+
+import 'bulma/css/bulma.css'
+
 import './App.css';
 
+import Banner from './containers/App';
+import Dashboard from './containers/Dashboard';
+import ModuleList from './containers/ModuleList';
+
+
 function App() {
+  const [user, setUser] = React.useState(null);
+
+  React.useEffect(() => {
+    auth.onAuthStateChanged(xUser => {
+      setUser(xUser);
+    })
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" exact={true}><Banner /></Route>
+        <Route path="/dashboard" exact><Dashboard user={user} /></Route>
+        <Route path="/dashboard/:subject"><ModuleList user={user} /></Route>
+      </Switch>
+    </Router>
   );
 }
 
