@@ -11,6 +11,7 @@ import './App.css';
 import Banner from './containers/App';
 import Dashboard from './containers/Dashboard';
 import ModuleList from './containers/ModuleList';
+import Profile from './containers/Profile';
 import NotFound from './components/NotFound';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
       <Switch>
         <Route path="/" exact={true}><Banner /></Route>
         <Route path="/dashboard" exact><Dashboard user={user} /></Route>
+        <Route path="/profile"><Profile user={user} /></Route>
         <Route path="/dashboard/:subject" exact><ModuleList user={user} /></Route>
         <Route path="*" exact><NotFound /></Route>
       </Switch>

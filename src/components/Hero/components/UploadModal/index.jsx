@@ -21,7 +21,7 @@ const ButtonContainer = styled.div`
 
 const UploadModal = ({ isOpen, closeModal, user }) => {
     const [moduleName, setModuleName] = React.useState('');
-    const [selectedFile, setSelectedFile] = React.useState(null);
+    const [selectedFile, setSelectedFile] = React.useState('');
     const [subject, setSubject] = React.useState('');
     const [loading, setLoading] = React.useState(false);
     const [percentage, setPercentage] = React.useState(0);
@@ -32,11 +32,12 @@ const UploadModal = ({ isOpen, closeModal, user }) => {
         setSubject(value)
     }
     
+    console.log(selectedFile)
     React.useEffect(() => {
         return () => {
             setSubject('');
             setModuleName('');
-            setSelectedFile(null);
+            setSelectedFile();
         }
     }, [isOpen])
 
@@ -48,7 +49,7 @@ const UploadModal = ({ isOpen, closeModal, user }) => {
 
     const handleSave = () => {
         if (!moduleName || !moduleName.length) {
-            let message = `<span class="icon mdi mdi-alert-circle"></span> Please enter the file name.`;
+            let message = `<span class="icon mdi mdi-shield-alert"></span> Please enter the file name.`;
             bulmaToast.toast({
                 message,
                 type: 'is-grey',
@@ -62,9 +63,9 @@ const UploadModal = ({ isOpen, closeModal, user }) => {
             let message = '';
 
             if (!subject) {
-                message = `<span class="icon mdi mdi-alert-circle"></span> Please select a subject.`;
+                message = `<span class="icon mdi mdi-shield-alert"></span> Please select a subject.`;
             } else {
-                message = `<span class="icon mdi mdi-alert-circle"></span> Please select a file to be uploaded.`;
+                message = `<span class="icon mdi mdi-shield-alert"></span> Please select a file to be uploaded.`;
             }
             
             bulmaToast.toast({
@@ -95,7 +96,7 @@ const UploadModal = ({ isOpen, closeModal, user }) => {
             setPercentage(totalPercentage);
         },
         (error) => {
-            const message = `<span class="icon mdi mdi-alert-circle"></span> ${error.message}`;
+            const message = `<span class="icon mdi mdi-shield-alert"></span> ${error.message}`;
 
             collectionRef.delete();
             storageRef.delete();
@@ -155,12 +156,16 @@ const UploadModal = ({ isOpen, closeModal, user }) => {
                     </div> 
                     <div className="file has-name"> 
                         <label className="file-label" style={{ width: '100%' }}>
-                            <input className="file-input" type="file" name="resume" 
-                            onChange={(event) => {
-                                event.persist();
-                                const { files } = event.target;
-                                setSelectedFile(files[0]);
-                            }} />
+                            <input 
+                                className="file-input" 
+                                type="file" 
+                                name="resume"
+                                onChange={(event) => {
+                                    event.persist();
+                                    const { files } = event.target;
+                                    setSelectedFile(files[0]);
+                                }} 
+                            />
                             <span className="file-cta">
                                 <Icon className="mdi-upload" />
                                 {window.innerWidth < 481 ? '' : 'UPLOAD'}

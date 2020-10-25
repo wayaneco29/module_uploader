@@ -41,7 +41,7 @@ const ModuleList = ({ user }) => {
         } else {
             setTitle(subject)
         }
-    }, []);
+    }, [subject]);
 
     React.useEffect(() => {
         try {
@@ -68,7 +68,11 @@ const ModuleList = ({ user }) => {
 
     return (
         <div>
-            <Navbar user={user} url="/dashboard" />
+            <Navbar user={user} url="/dashboard" navigation={(
+                <React.Fragment>
+                    GO BACK
+                </React.Fragment>
+            )} />
             <Hero user={user} title={title} hasUploadButton={false} />
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height:'calc(100vh - 184px)' }}>
                 <React.Fragment>
@@ -93,7 +97,7 @@ const ModuleList = ({ user }) => {
                                                     <td style={{ verticalAlign: 'middle' }}>{xModule.name}</td>
                                                     <td style={{ verticalAlign: 'middle' }}>{DT.fromISO(xModule.date_uploaded).toFormat('DDD @ t')}</td>
                                                     <td style={{ width: '10px' }}>
-                                                        <a href={xModule.url} target="_blank" download>
+                                                        <a href={xModule.url} target="_blank" rel="noopener noreferrer" download>
                                                             <Icon className="mdi-download" style={{ cursor: 'pointer', fontSize: '20px' }} />
                                                         </a>
                                                     </td>

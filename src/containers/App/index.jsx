@@ -8,6 +8,7 @@ import Icon from '../../components/Icon';
 import styled from 'styled-components';
 
 import img from '../../image/maci.png';
+import { auth } from '../../firebase';
 
 const Divider = styled.div`
   margin-top: 2rem;

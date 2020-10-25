@@ -28,12 +28,12 @@ const Hero = ({ user, title, hasUploadButton }) => {
                             {title}
                         </h1>
                         {user && hasUploadButton ? (
-                            <Button className="is-warning" onClick={handleToggleModal}><Icon className="mdi-upload" style={{ marginRight: '0px' }} /> UPLOAD MODULE</Button>
+                            <Button className="is-warning" onClick={handleToggleModal}><Icon className="mdi-upload" style={{ marginRight: '0px' }} /> UPLOAD {window.innerWidth < 481 ? '' : 'MODULE'}</Button>
                         ) : ''}
                     </Div>
                 </div>
             </div>
-            <UploadModal isOpen={openModal} closeModal={handleToggleModal} user={user} />
+            {openModal && <UploadModal isOpen={openModal} closeModal={handleToggleModal} user={user} />}
         </section>
     )
 }
