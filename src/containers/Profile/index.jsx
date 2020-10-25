@@ -165,6 +165,18 @@ const Profile = ({ user }) => {
     const handleProfileUpdate = async () => {
         try {
             setIsLoading(true);
+
+            if (!selectedFile && user.displayName === displayName && !password && !newPassword) {
+                const message = `<span class="icon mdi mdi-shield-alert"></span> Unable to save. No changes detected`
+                bulmaToast.toast({
+                    message,
+                    type: 'is-grey',
+                    duration: 2000,
+                    position: 'top-center',
+                })
+                setIsLoading(false);
+                return;
+            }
             
             if (!password && !password.length) {
                 if (imageUrl.isChanged) {

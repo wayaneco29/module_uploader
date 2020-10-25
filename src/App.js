@@ -21,6 +21,14 @@ function PrivateRoute({ user, ...props }) {
   return <Route user={user} {...props} />
 }
 
+function RedirectToHome({ user, ...props }) {
+  if (!user) {
+    return <Redirect to="/" user={user} />
+  }
+
+  return <Route user={user} {...props} />
+}
+
 function App() {
   const [user, setUser] = React.useState(null);
 
@@ -45,7 +53,7 @@ function App() {
       <Switch>
         <PrivateRoute path="/" user={user} exact={true}><Banner /></PrivateRoute>
         <Route path="/dashboard" exact><Dashboard user={user} /></Route>
-        <Route path="/profile"><Profile user={user} /></Route>
+        <RedirectToHome path="/profile"><Profile user={user} /></RedirectToHome>
         <Route path="/dashboard/:subject" exact><ModuleList user={user} /></Route>
         <Route path="*" exact><NotFound /></Route>
       </Switch>
