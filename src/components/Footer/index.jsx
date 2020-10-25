@@ -16,7 +16,7 @@ const Footer = () => {
 
     return (
         <Div>
-            Made with <Icon className="mdi-heart" /> by: <a href="https://www.facebook.com/Wayandanyael" target="_blank" style={{ color: '#ffdd57'}}>Wayan Danyael Eco</a> &copy; 2020.
+            All right reserved @ <span style={{ color: '#ffdd57'}}>Macrohon Institute Inc.</span> &copy; 2020.
         </Div>
     )
 }

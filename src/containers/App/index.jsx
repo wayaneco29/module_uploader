@@ -22,6 +22,12 @@ const Div = styled.div`
     }
 `;
 
+const Image = styled.img`
+    @media (max-width: 650px) {
+        width: 140px !important;
+    }
+`;
+
 const Banner = () => {
     const [openModal, setOpenModal] = React.useState(false);
 
@@ -31,9 +37,9 @@ const Banner = () => {
     <React.Fragment>
         <div className="App">
             <header className="App-header">
-                <img src={img} />
+                <Image src={img} />
                 <Divider />
-                <h1 style={{ margin: '0px 14px' }}>MACROHON INSTITUTE INC. MODULE SYSTEM</h1>
+                <h1 style={{ margin: '0px 14px', color: '#eee' }}>MACROHON INSTITUTE INC. MODULE SYSTEM</h1>
                 <Divider />
                 <Div>
                     <button className="button is-warning" onClick={handleToggleModal}>

@@ -58,7 +58,11 @@ const LoginModal = ({ isOpen, closeModal, ...props }) => {
 
     return (
         <React.Fragment>
-            <Modal isOpen={isOpen} closeModal={closeModal} {...props}>
+            <Modal isOpen={isOpen} closeModal={() => {
+                if (!loading) {
+                    closeModal();
+                }
+            }} {...props}>
                 <Content>
                     <Input hasIcon="mdi-teach" placeholder="Email" handleChange={handleOnChange} name="email" />
                     <Input hasIcon="mdi-lock" placeholder="Password" type="password" handleChange={handleOnChange} name="password" />

@@ -288,7 +288,7 @@ const Profile = ({ user }) => {
         <React.Fragment>
             <Navbar user={user} navigation={(
                 <React.Fragment>
-                    GO BACK
+                    <Icon className="mdi-arrow-left" /> <p>GO BACK</p>
                 </React.Fragment>
             )} url="/dashboard" />
             <Div1>
@@ -309,30 +309,30 @@ const Profile = ({ user }) => {
                             }
                         </div>
                         <div style={{ marginTop: '3rem' }}>
-                            <div class="field">
+                            <div className="field">
                             <label className="label">Name</label>
                                 <div className="control has-icons-left has-icons-right">
                                     <div className="control">
                                         <CustomInput className="input" type="text" placeholder="Name" value={displayName} onChange={handleChangeName} />
                                     </div>
-                                    <span class="icon is-small is-left">
+                                    <span className="icon is-small is-left">
                                         <Icon className="mdi-account"/>
                                     </span>
                                 </div>
                             </div>
-                            <div class="field">
+                            <div className="field">
                                 <label className="label">Email</label>
                                 <div className="control has-icons-left">
                                     <div className="control">
                                         <CustomInput className="input" type="email" placeholder="Email" defaultValue={user && user.email} readOnly/>
                                     </div>
-                                    <span class="icon is-small is-left">
+                                    <span className="icon is-small is-left">
                                         <Icon className="mdi-email"/>
                                     </span>
                                 </div>
                             </div>
                             <Line />
-                            <div class="field">
+                            <div className="field">
                                 <label className="label">Current Password</label>
                                 <div style={{ position: 'relative' }}>
                                     <div className="control has-icons-left has-icons-right">
@@ -346,11 +346,11 @@ const Profile = ({ user }) => {
                                                 onChange={handlePasswordChangeCurrent}
                                             />
                                         </div>
-                                        <span class="icon is-small is-left">
+                                        <span className="icon is-small is-left">
                                             <Icon className="mdi-lock"/>
                                         </span>
                                     </div>
-                                    <IconRight class="icon is-small is-right" onClick={handleToggleShowCurrent}>
+                                    <IconRight className="icon is-small is-right" onClick={handleToggleShowCurrent}>
                                         {showCurrentPass ? (
                                                 <Icon className="mdi-eye"/>
                                         ): (
@@ -359,7 +359,7 @@ const Profile = ({ user }) => {
                                     </IconRight>
                                 </div>
                             </div>
-                            <div class="field">
+                            <div className="field">
                                 <label className="label">New Password</label>
                                 <div style={{ position: 'relative' }}>
                                     <div className="control has-icons-left has-icons-right">
@@ -373,11 +373,11 @@ const Profile = ({ user }) => {
                                                 onChange={handlePasswordChangeNew}
                                             />
                                         </div>
-                                        <span class="icon is-small is-left">
+                                        <span className="icon is-small is-left">
                                             <Icon className="mdi-lock"/>
                                         </span>
                                     </div>
-                                    <IconRight class="icon is-small is-right" onClick={handleToggleShowNew}>
+                                    <IconRight className="icon is-small is-right" onClick={handleToggleShowNew}>
                                         {showNewPass ? (
                                                 <Icon className="mdi-eye"/>
                                         ): (

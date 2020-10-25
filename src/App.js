@@ -1,7 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 import { auth } from './firebase';
 
 import 'bulma/css/bulma.css'
@@ -13,6 +12,14 @@ import Dashboard from './containers/Dashboard';
 import ModuleList from './containers/ModuleList';
 import Profile from './containers/Profile';
 import NotFound from './components/NotFound';
+
+function PrivateRoute({ user, ...props }) {
+  if (user) {
+    return <Redirect to="/dashboard" />
+  }
+
+  return <Route user={user} {...props} />
+}
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -36,7 +43,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact={true}><Banner /></Route>
+        <PrivateRoute path="/" user={user} exact={true}><Banner /></PrivateRoute>
         <Route path="/dashboard" exact><Dashboard user={user} /></Route>
         <Route path="/profile"><Profile user={user} /></Route>
         <Route path="/dashboard/:subject" exact><ModuleList user={user} /></Route>

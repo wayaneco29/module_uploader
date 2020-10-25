@@ -133,14 +133,18 @@ const UploadModal = ({ isOpen, closeModal, user }) => {
     }
 
     return (
-        <Modal isOpen={isOpen} closeModal={closeModal} title="Upload a file">
+        <Modal isOpen={isOpen} closeModal={() => {
+            if (!loading) {
+                closeModal();
+            }
+        }} title="Upload a file">
             <Content>
                 <div>
-                    <Input placeholder="File Name" value={moduleName} onChange={handleModuleChange} />
+                    <Input placeholder="File Name" value={moduleName} onChange={handleModuleChange} disabled={loading} />
                     <div className="field">
                         <div className="control">
                             <div className="select" style={{ width: '100%' }}>
-                                <select style={{ width: '100%' }} onChange={handleChangeSubject} value={subject}>
+                                <select style={{ width: '100%' }} onChange={handleChangeSubject} value={subject} disabled={loading}>
                                     <option>Select Subject</option>
                                     <option value="english">English</option>
                                     <option value="filipino">Filipino</option>
@@ -164,7 +168,8 @@ const UploadModal = ({ isOpen, closeModal, user }) => {
                                     event.persist();
                                     const { files } = event.target;
                                     setSelectedFile(files[0]);
-                                }} 
+                                }}
+                                disabled={loading}
                             />
                             <span className="file-cta">
                                 <Icon className="mdi-upload" />
