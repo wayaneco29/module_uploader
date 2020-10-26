@@ -34,6 +34,12 @@ const Div1 = styled.div`
     }
 `;
 
+const Div2 = styled.div`
+    @media (max-width: 650px) {
+        min-height: calc(100vh - 140px) !important;
+    }
+`;
+
 const A = styled.a`
     &:hover {
         color: #3273dc !important;
@@ -98,7 +104,7 @@ const ModuleList = ({ user }) => {
                 </React.Fragment>
             )} />
             <Hero user={user} title={title} hasUploadButton={false} />
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height:'calc(100vh - 184px)' }}>
+            <Div2 style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight:'calc(100vh - 173px)' }}>
                 <React.Fragment>
                     <div className="hero-body" style={{ paddingTop: '0px', paddingBottom: '30px'}}>
                         <div className="container" style={{ overflowX: 'auto', height: '100%' }}>
@@ -146,7 +152,7 @@ const ModuleList = ({ user }) => {
                                     </div>
                                 ) : (
                                     <div style={{ fontSize: '1.3rem', textAlign: 'center', fontWeight: 'bold', height: '100%' }}>
-                                        <Icon style={{ fontSize: '6rem', marginTop: '2rem' }} className="mdi-emoticon-sad" />
+                                        <Icon style={{ fontSize: '6rem', marginTop: '5rem' }} className="mdi-emoticon-sad" />
                                         <p style={{ marginTop: '1.3rem' }} >No modules available yet.</p>
                                     </div>
                                 )
@@ -155,7 +161,7 @@ const ModuleList = ({ user }) => {
                     </div>
                 </React.Fragment>
                 <Footer />
-            </div>
+            </Div2>
             {openDeleteModal && (
                 <DeleteModal 
                     isOpen={openDeleteModal} 
