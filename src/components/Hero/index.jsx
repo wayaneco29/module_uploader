@@ -15,6 +15,9 @@ const Div1 = styled.div`
 `;
 
 const Div2 = styled.div`
+    border-bottom: 1px solid #c5c5c5;
+    margin-bottom: 2rem;
+    
     @media (max-width: 650px) {
         padding: 2rem 1.5rem !important;
     }

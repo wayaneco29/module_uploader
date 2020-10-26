@@ -53,7 +53,7 @@ function App() {
       <Switch>
         <PrivateRoute path="/" user={user} exact={true}><Banner /></PrivateRoute>
         <Route path="/dashboard" exact><Dashboard user={user} /></Route>
-        <RedirectToHome path="/profile"><Profile user={user} /></RedirectToHome>
+        <RedirectToHome user={user} path="/profile"><Profile user={user} /></RedirectToHome>
         <Route path="/dashboard/:subject" exact><ModuleList user={user} /></Route>
         <Route path="*" exact><NotFound /></Route>
       </Switch>

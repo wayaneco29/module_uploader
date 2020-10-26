@@ -36,7 +36,7 @@ const Div1 = styled.div`
 
 const Div2 = styled.div`
     @media (max-width: 650px) {
-        min-height: calc(100vh - 140px) !important;
+        min-height: calc(100vh - 175px) !important;
     }
 `;
 
@@ -104,7 +104,7 @@ const ModuleList = ({ user }) => {
                 </React.Fragment>
             )} />
             <Hero user={user} title={title} hasUploadButton={false} />
-            <Div2 style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight:'calc(100vh - 173px)' }}>
+            <Div2 style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight:'calc(100vh - 208px)' }}>
                 <React.Fragment>
                     <div className="hero-body" style={{ paddingTop: '0px', paddingBottom: '30px'}}>
                         <div className="container" style={{ overflowX: 'auto', height: '100%' }}>
